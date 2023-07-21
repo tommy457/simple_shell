@@ -41,10 +41,9 @@ int main(void)
 		token = strtok(line, delim);
 		while (token != NULL)
 		{
-			ncom++;
+			++ncom;
 			token = strtok(NULL, delim);
 		}
-		ncom++;
 
 		argv = malloc(sizeof(char *) * ncom);
 		if (argv == NULL)
