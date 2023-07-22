@@ -24,7 +24,7 @@ int main(void)
 		if (nchars == -1)
 		{
 			printf("Eroor1\n");
-			exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);;
 		}
 		if (*line == '\n')
 		{
