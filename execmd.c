@@ -6,7 +6,7 @@
  * Return: NA
  */
 
-void execmd(char **commands)
+int execmd(char **commands)
 {
 	pid_t pid;
 	char *command = NULL;
@@ -22,19 +22,30 @@ void execmd(char **commands)
 			if (pid == -1)
 			{
 				perror("hsh: (fork)\n");
-				exit(-1);
+				free(command);
+				return (-1);
 			}
 			if (pid == 0)
-				execve(command, commands, NULL);
-
+			{
+				if (execve(command, commands, environ) == -1)
+				{
+					perror("Error:");
+					free(command);
+					return (-1);
+				}
+			}
 			else
 				wait(&status);
+			free(command);
+
 		}
 		else
 		{
-			perror("Error:");
+			perror("Command");
+			return (-1);
 		}
 	}
+	return (-1);
 }
 /**
  * is_exe - checks if a command is in PATH
@@ -85,3 +96,4 @@ char *is_exe(char *command)
 	}
 	return (NULL);
 }
+

@@ -24,16 +24,43 @@ int main(void)
 		if (nchars == -1)
 		{
 			printf("Eroor1\n");
-			exit(EXIT_FAILURE);;
+			exit(EXIT_FAILURE);
 		}
-		if (*line == '\n')
+		if (*line != '\n')
 		{
-			continue;
+			line[nchars - 1] = '\0';
+			argv = split_line(line, delim, nchars);
+			if (argv == NULL)
+			{
+				break;
+			}
+			if (_strcmp(argv[0],"exit") == 0)
+			{
+				free_arr(argv);
+				free(line);
+				exit(EXIT_SUCCESS);
+			}
+			if (execmd(argv) == -1)
+			{
+				free_arr(argv);
+			}
 		}
-		argv = split_line(line, delim, nchars);
-		execmd(argv);
 	}
-	free(argv);
+	free_arr(argv);
 	free(line);
 	return (0);
+}
+/**
+ * free_arr - frees an array
+ * @argv: array to be freed
+ * Return: NA
+ */
+
+void free_arr(char **argv)
+{
+	int i;
+
+	for (i = 0; argv[i] != NULL; i++)
+		free(argv[i]);
+	free(argv);
 }

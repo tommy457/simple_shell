@@ -12,10 +12,10 @@
 
 extern char **environ;
 
-void execmd(char **commands);
+int execmd(char **commands);
 char **split_line(char *arr, char *delim, ssize_t nchars);
 char *find_path(char *name);
 int _strcmp(char *s1, char *s2);
 char *is_exe(char *command);
-
+void free_arr(char **argv);
 #endif
