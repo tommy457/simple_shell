@@ -36,7 +36,6 @@ int execmd(char **commands)
 			}
 			else
 				wait(&status);
-			free(command);
 
 		}
 		else
