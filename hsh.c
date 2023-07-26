@@ -21,6 +21,7 @@ int main(void)
 		nchars = _getline(&line);
 		if (nchars == -1)
 		{
+			free(line);
 			exit(EXIT_FAILURE);
 		}
 		if (*line != '\n')
