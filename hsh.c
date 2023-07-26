@@ -34,12 +34,6 @@ int main(void)
 			{
 				break;
 			}
-			if (_strcmp(argv[0],"exit") == 0)
-			{
-				free_arr(argv);
-				free(line);
-				exit(EXIT_SUCCESS);
-			}
 			if (execmd(argv) == -1)
 			{
 				free_arr(argv);
