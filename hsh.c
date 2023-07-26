@@ -46,8 +46,6 @@ int main(void)
 			}
 		}
 	}
-	free_arr(argv);
-	free(line);
 	return (0);
 }
 /**
