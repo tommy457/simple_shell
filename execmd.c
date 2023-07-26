@@ -30,13 +30,14 @@ int execmd(char **commands)
 				if (execve(command, commands, environ) == -1)
 				{
 					perror("Error:");
-					free(command);
 					return (-1);
 				}
 			}
 			else
+			{
 				wait(&status);
-
+			}
+			free(command);
 		}
 		else
 		{
@@ -61,16 +62,15 @@ char *is_exe(char *command)
 
 	if (stat(command, &buffer) == 0)
 	{
-		return (command);
+		file_path = strdup(command);
+		return (file_path);
 	}
 	path = find_path(name);
 	if (path)
 	{
 		path_cpy = strdup(path);
 		comm_length = strlen(command);
-
 		path_tok = strtok(path_cpy, ":");
-
 		while (path_tok != NULL)
 		{
 			dir_length = strlen(path_tok);
@@ -95,4 +95,3 @@ char *is_exe(char *command)
 	}
 	return (NULL);
 }
-
